@@ -1,0 +1,22 @@
+[package]
+name = "oi_checklist"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.75"
+async-trait = "0.1.73"
+base64 = "0.21.4"
+clap = { version = "4.4.3", features = ["derive"] }
+console = "0.15.7"
+directories = "5.0.1"
+indicatif = "0.17.6"
+nipper = "0.1.9"
+open = "5.0.0"
+reqwest = { version = "0.11.20", features = ["rustls-tls", "json", "multipart", "gzip", "cookies"], default-features = false }
+serde = "1.0.188"
+serde_json = "1.0.107"
+tokio = { version = "1.32.0", features = ["macros", "rt", "rt-multi-thread", "sync"] }
+yew = { version = "0.20.0", features = ["ssr"] }
