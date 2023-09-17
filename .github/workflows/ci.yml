@@ -1,0 +1,38 @@
+name: CI
+
+on: [ push ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          components: clippy
+
+      - uses: Swatinem/rust-cache@v1
+
+      - uses: actions-rs/clippy-check@v1
+        with:
+          args: --all-features --all-targets
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          components: rustfmt
+
+      - run: cargo +nightly fmt --all --check
