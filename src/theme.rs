@@ -135,17 +135,17 @@ impl<'a> ParserProgress<'a> {
             drawers,
         }
     }
-}
 
-impl<'a> Drop for ParserProgress<'a> {
-    fn drop(&mut self) {
-        for (handle, pb) in &self.drawers {
-            handle.abort();
+    pub async fn finish(self) -> anyhow::Result<()> {
+        for (handle, pb) in self.drawers {
+            handle.await?;
 
             if !pb.is_finished() {
                 pb.finish_with_message("canceled");
             }
         }
+
+        Ok(())
     }
 }
 

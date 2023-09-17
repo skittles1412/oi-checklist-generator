@@ -120,7 +120,10 @@ async fn main() -> anyhow::Result<()> {
             .parse(dmoj_config, ojuz_config, None, cookie::Jar::default())
             .await
             .context("parsing submissions");
-        drop(progress);
+        progress
+            .finish()
+            .await
+            .context("cleaning up progress bar")?;
 
         let ojs = match parse_result {
             Ok(ojs) => ojs,
