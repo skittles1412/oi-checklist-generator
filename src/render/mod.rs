@@ -132,11 +132,17 @@ struct IndexProps {
 
 impl IndexProps {
     fn points_scored(&self) -> f32 {
-        self.olympiads.iter().map(OlympiadProps::points_scored).sum()
+        self.olympiads
+            .iter()
+            .map(OlympiadProps::points_scored)
+            .sum()
     }
 
     fn total_points(&self) -> f32 {
-        self.olympiads.iter().map(OlympiadProps::points_scored).sum()
+        self.olympiads
+            .iter()
+            .map(OlympiadProps::points_scored)
+            .sum()
     }
 }
 
