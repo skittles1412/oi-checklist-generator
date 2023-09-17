@@ -59,14 +59,16 @@ impl Parser {
                     "a[href^='/problem/view/']",
                     ".progressbar > .text",
                 ]
-                    .map(|s| {
-                        let selection = submission.select(s);
-                        if selection.length() != 1 {
-                            None
-                        } else {
-                            Some(selection)
-                        }
-                    })  else {continue;};
+                .map(|s| {
+                    let selection = submission.select(s);
+                    if selection.length() != 1 {
+                        None
+                    } else {
+                        Some(selection)
+                    }
+                }) else {
+                    continue;
+                };
 
                 let id = id
                     .attr("href")
