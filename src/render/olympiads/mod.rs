@@ -103,7 +103,7 @@ const fn concat_array_helper<const A: usize, const B: usize, const C: usize>(
         }
 
         #[allow(path_statements)]
-        LengthCheck::<A, B, C>::ASSERT
+        LengthCheck::<A, B, C>::ASSERT;
     }
 
     // so I don't deal with MaybeUninit's

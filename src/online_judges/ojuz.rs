@@ -36,7 +36,7 @@ impl Parser {
                 })
                 .ok();
 
-            let url = format!("https://oj.uz/submissions?handle={}&page={page}", username);
+            let url = format!("https://oj.uz/submissions?handle={username}&page={page}");
 
             let html = client
                 .get(&url)
@@ -61,10 +61,10 @@ impl Parser {
                 ]
                 .map(|s| {
                     let selection = submission.select(s);
-                    if selection.length() != 1 {
-                        None
-                    } else {
+                    if selection.length() == 1 {
                         Some(selection)
+                    } else {
+                        None
                     }
                 }) else {
                     continue;
