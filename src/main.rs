@@ -29,7 +29,7 @@ fn load_cache_from_file(theme: &Theme, file: impl AsRef<Path>) -> Cache {
     theme.log_warn("failed to load cache from file (either it didn't exist or it is corrupted)");
     theme.log_info("using fresh cache");
 
-    Default::default()
+    Cache::default()
 }
 
 fn save_cache_to_file(t: &Cache, file: impl AsRef<Path>) -> anyhow::Result<()> {

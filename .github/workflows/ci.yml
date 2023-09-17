@@ -9,30 +9,44 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions-rs/toolchain@v1
+      - name: Install stable rust
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          profile: minimal
-          toolchain: stable
-          components: clippy
+          components: clippy, rust-src
 
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
 
-      - uses: actions-rs/clippy-check@v1
+      # https://github.com/actions-rs/clippy-check/issues/2#issuecomment-807878478
+      - name: Check workflow permissions
+        id: check_permissions
+        uses: scherermichael-oss/action-has-permission@1.0.6
         with:
-          args: --all-features --all-targets
+          required-permission: write
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clippy with annotations
+        uses: actions-rs/clippy-check@v1
+        if: steps.check_permissions.outputs.has-permission
+        with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features --all-targets -- -D warnings
+
+      - name: Clippy without annotations
+        if: ${{ !steps.check_permissions.outputs.has-permission }}
+        run: cargo clippy --all-features --all-targets -- -D warnings
 
   fmt:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions-rs/toolchain@v1
+      - name: Install nightly rust
+        uses: dtolnay/rust-toolchain@nightly
         with:
-          profile: minimal
-          toolchain: nightly
           components: rustfmt
 
-      - run: cargo +nightly fmt --all --check
+      - name: Rustfmt
+        run: cargo +nightly fmt --all --check
