@@ -141,7 +141,7 @@ impl IndexProps {
     fn total_points(&self) -> f32 {
         self.olympiads
             .iter()
-            .map(OlympiadProps::points_scored)
+            .map(OlympiadProps::total_points)
             .sum()
     }
 }
