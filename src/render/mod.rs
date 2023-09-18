@@ -1,5 +1,8 @@
 use crate::online_judges::OnlineJudges;
-use std::borrow::Cow;
+use std::{
+    borrow::Cow,
+    time::{SystemTime, UNIX_EPOCH},
+};
 use yew::{prelude::*, ServerRenderer};
 
 mod olympiads;
@@ -127,6 +130,8 @@ fn ProgressBar(props: &ProgressBarProps) -> Html {
 
 #[derive(Clone, PartialEq, Properties)]
 struct IndexProps {
+    dmoj_username: Option<String>,
+    ojuz_username: Option<String>,
     olympiads: Vec<OlympiadProps>,
 }
 
@@ -139,20 +144,48 @@ impl IndexProps {
     }
 
     fn total_points(&self) -> f32 {
-        self.olympiads
-            .iter()
-            .map(OlympiadProps::points_scored)
-            .sum()
+        self.olympiads.iter().map(OlympiadProps::total_points).sum()
     }
 }
 
 #[function_component]
 fn Index(props: &IndexProps) -> Html {
+    let time = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("time went backwards... fix your clock")
+        .as_millis();
+
+    let users = [props.dmoj_username.as_ref().map(|username| html! {
+        <>
+            {"DMOJ user "} <a href={format!("https://dmoj.ca/user/{username}")}>{username}</a>
+        </>
+    }), props.ojuz_username.as_ref().map(|username| html! {
+        <>
+            {"oj.uz user "} <a href={format!("https://oj.uz/profile/{username}")}>{username}</a>
+        </>
+    })].into_iter().flatten().collect::<Vec<_>>();
+
+    let users = match &users[..] {
+        [] => html! {},
+        [u] => html! {<>{"for "} {u.clone()} {" "}</>},
+        [u1, u2] => html! {<>{"for "} {u1.clone()} {" and "} {u2.clone()} {" "}</>},
+        _ => unreachable!(),
+    };
+
     html! {
         <main class="container">
             <div class="row">
                 <h1 class="text-center pb-2 mt-4 mb-2">{"OI Checklist"}</h1>
                 <hr/>
+            </div>
+            <div class="row mb-4">
+                <div class="col text-end text-secondary">
+                    {"Generated "} {users}
+                    {"at "} <span id="generation-time">{time}</span>
+                    <script>{format!(r#"document.addEventListener("DOMContentLoaded", function() {{
+                        document.getElementById("generation-time").textContent = new Date({time}).toLocaleString();
+                    }});"#)}</script>
+                </div>
             </div>
             <div class="row mt-2 mb-4"><ProgressBar points={props.points_scored()} total={props.total_points()}/></div>
             <div class="row">
@@ -310,8 +343,14 @@ fn Problem(props: &ProblemProps) -> Html {
     }
 }
 
-pub async fn render_checklist(ojs: OnlineJudges) -> String {
+pub async fn render_checklist(
+    ojs: OnlineJudges,
+    dmoj_username: Option<String>,
+    ojuz_username: Option<String>,
+) -> String {
     let page = ServerRenderer::<Index>::with_props(move || IndexProps {
+        dmoj_username,
+        ojuz_username,
         olympiads: vec![
             olympiads::ioi::to_olympiad(&ojs),
             olympiads::joisc::to_olympiad(&ojs),

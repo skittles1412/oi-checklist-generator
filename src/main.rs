@@ -79,7 +79,7 @@ async fn main() -> anyhow::Result<()> {
 
         let mut cache = load_cache_from_file(&theme, &cache_location);
 
-        let (dmoj_config, dmoj_progress) = match cli.dmoj_username {
+        let (dmoj_config, dmoj_progress) = match cli.dmoj_username.clone() {
             Some(username) => {
                 let (problems_tx, problems_rx) = mpsc::unbounded_channel();
                 let (submissions_tx, submissions_rx) = mpsc::unbounded_channel();
@@ -99,7 +99,7 @@ async fn main() -> anyhow::Result<()> {
             None => (None, None),
         };
 
-        let (ojuz_config, ojuz_progress) = match cli.ojuz_username {
+        let (ojuz_config, ojuz_progress) = match cli.ojuz_username.clone() {
             Some(username) => {
                 let (tx, rx) = mpsc::unbounded_channel();
 
@@ -148,7 +148,7 @@ async fn main() -> anyhow::Result<()> {
         ojs
     };
 
-    let output_html = render::render_checklist(ojs).await;
+    let output_html = render::render_checklist(ojs, cli.dmoj_username, cli.ojuz_username).await;
 
     fn default_output_location() -> anyhow::Result<PathBuf> {
         Ok(UserDirs::new()
