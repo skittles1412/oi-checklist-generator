@@ -44,14 +44,14 @@ fn save_cache_to_file(t: &Cache, file: impl AsRef<Path>) -> anyhow::Result<()> {
 #[derive(Parser)]
 struct Cli {
     /// DMOJ username
-    #[arg(long, alias("dmoj"))]
+    #[arg(long("dmoj"), alias("dmoj-username"))]
     dmoj_username: Option<String>,
 
     /// oj.uz username
-    #[arg(long, alias("ojuz"))]
+    #[arg(long("ojuz"), alias("ojuz-username"))]
     ojuz_username: Option<String>,
 
-    /// output location
+    /// Output location (defaults to oi-checklist.html in the Documents folder)
     #[arg(short, long)]
     output: Option<String>,
 
