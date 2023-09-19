@@ -1,11 +1,12 @@
-use crate::{
-    online_judges::{dmoj, ojuz},
-    theme::{DmojProgress, OjuzProgress, Theme},
-};
+use crate::theme::{DmojProgress, OjuzProgress, Theme};
 use anyhow::Context;
-use cache::Cache;
 use clap::Parser;
 use directories::{ProjectDirs, UserDirs};
+use oi_checklist_generator::{
+    cache::Cache,
+    online_judges::{dmoj, ojuz},
+    render,
+};
 use reqwest::cookie;
 use std::{
     fs::{self, File},
@@ -14,9 +15,6 @@ use std::{
 };
 use tokio::sync::mpsc;
 
-mod cache;
-mod online_judges;
-mod render;
 mod theme;
 
 fn load_cache_from_file(theme: &Theme, file: impl AsRef<Path>) -> Cache {

@@ -1,4 +1,4 @@
-use crate::online_judges::ParserEvent;
+use oi_checklist_generator::online_judges::ParserEvent;
 use console::{style, Style};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use std::{fmt::Display, sync::Arc, time::Duration};
