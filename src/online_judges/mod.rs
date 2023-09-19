@@ -64,7 +64,7 @@ impl OnlineJudge {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct OnlineJudges {
     pub dmoj: OnlineJudge,
     pub ojuz: OnlineJudge,

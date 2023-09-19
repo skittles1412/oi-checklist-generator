@@ -1,11 +1,12 @@
-use crate::{
-    online_judges::{dmoj, ojuz},
-    theme::{DmojProgress, OjuzProgress, Theme},
-};
+use crate::theme::{DmojProgress, OjuzProgress, Theme};
 use anyhow::Context;
-use cache::Cache;
 use clap::Parser;
 use directories::{ProjectDirs, UserDirs};
+use oi_checklist_generator::{
+    cache::Cache,
+    online_judges::{dmoj, ojuz},
+    render,
+};
 use reqwest::cookie;
 use std::{
     fs::{self, File},
@@ -14,9 +15,6 @@ use std::{
 };
 use tokio::sync::mpsc;
 
-mod cache;
-mod online_judges;
-mod render;
 mod theme;
 
 fn load_cache_from_file(theme: &Theme, file: impl AsRef<Path>) -> Cache {
@@ -46,14 +44,14 @@ fn save_cache_to_file(t: &Cache, file: impl AsRef<Path>) -> anyhow::Result<()> {
 #[derive(Parser)]
 struct Cli {
     /// DMOJ username
-    #[arg(long, alias("dmoj"))]
+    #[arg(long("dmoj"), alias("dmoj-username"))]
     dmoj_username: Option<String>,
 
     /// oj.uz username
-    #[arg(long, alias("ojuz"))]
+    #[arg(long("ojuz"), alias("ojuz-username"))]
     ojuz_username: Option<String>,
 
-    /// output location
+    /// Output location (defaults to oi-checklist.html in the Documents folder)
     #[arg(short, long)]
     output: Option<String>,
 
