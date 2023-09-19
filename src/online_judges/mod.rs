@@ -35,14 +35,14 @@ pub trait OnlineJudgeParser: Clone + Default + Serialize + DeserializeOwned {
     type Config;
 
     async fn parse(&mut self, client: &Client, config: Self::Config)
-                   -> anyhow::Result<OnlineJudge>;
+        -> anyhow::Result<OnlineJudge>;
 }
 
 #[derive(Debug, Clone, Default)]
 pub struct OnlineJudge(HashMap<String, f32>);
 
 impl OnlineJudge {
-    fn from<'a>(submissions: impl Iterator<Item=&'a Submission>, username: &str) -> OnlineJudge {
+    fn from<'a>(submissions: impl Iterator<Item = &'a Submission>, username: &str) -> OnlineJudge {
         let mut oj = OnlineJudge::default();
 
         for s in submissions {

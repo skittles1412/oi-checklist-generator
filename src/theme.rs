@@ -1,6 +1,6 @@
-use oi_checklist_generator::online_judges::ParserEvent;
 use console::{style, Style};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
+use oi_checklist_generator::online_judges::ParserEvent;
 use std::{fmt::Display, sync::Arc, time::Duration};
 use tokio::{sync::mpsc, task::JoinHandle};
 
