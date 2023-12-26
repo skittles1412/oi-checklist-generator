@@ -17,6 +17,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +50,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
@@ -90,6 +92,8 @@ jobs:
         run: |
           chmod +x oicg
 
+          mkdir examples
+
           ./oicg -o examples/blank.html
           ./oicg --dmoj skittles1412 --ojuz skittles1412 -o examples/skittles1412.html
           ./oicg --dmoj rainboy --ojuz rainboy -o examples/rainboy.html
@@ -110,6 +114,7 @@ jobs:
 
   fmt:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
