@@ -7,16 +7,16 @@ use yew::{prelude::*, ServerRenderer};
 
 mod olympiads;
 
-const BASE_HTML: &str = r#"<!DOCTYPE html>
+const BASE_HTML: &str = r##"<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     %%FAVICON%%
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <!-- https://afeld.github.io/bootstrap-toc -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css"
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.css"
           integrity="sha384-oJyFk/zeMJXNIGMVvmH262FT6dbSYss66WJHHgp1RlUk4/LfONQTzkAsHHwfcqat" crossorigin="anonymous">
     <style>
         a {
@@ -41,33 +41,41 @@ const BASE_HTML: &str = r#"<!DOCTYPE html>
 %%PAGE%%
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-<script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"
+<script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js"
         integrity="sha384-OGf04BRlCdmgZXHhCupHT3BIkznbahjfhX8DKSIEXyU9PvSO0/8iMiiVJPcA5vi7"
         crossorigin="anonymous"></script>
 <script>
-    $(`[data-bs-toggle="popover"]`).each(function () {
-        const hoverPopover = $(this).attr("data-bs-trigger") === "hover-popover";
-        const popover = new bootstrap.Popover(this, hoverPopover ? {trigger: "manual"} : {});
-        if (hoverPopover) {
-            $(this).on("mouseenter", () => {
-                popover.show();
-                $(".popover").on("mouseleave", () => popover.hide());
-            }).on("mouseleave", () => {
-                setTimeout(() => {
-                    if (!$(".popover:hover").length) {
-                        popover.hide();
-                    }
-                }, 100);
-            });
-        }
+    $(() => {
+        $(`[data-bs-toggle="popover"]`).each(function () {
+            const hoverPopover = $(this).attr("data-bs-trigger") === "hover-popover";
+            const popover = new bootstrap.Popover(this, hoverPopover ? {trigger: "manual"} : {});
+            if (hoverPopover) {
+                $(this).on("mouseenter", () => {
+                    popover.show();
+                    $(".popover").on("mouseleave", () => popover.hide());
+                }).on("mouseleave", () => {
+                    setTimeout(() => {
+                        if (!$(".popover:hover").length) {
+                            popover.hide();
+                        }
+                    }, 100);
+                });
+            }
+        });
+
+        // we manually initialize because otherwise scrollspy runs before toc
+        Toc.init($("#toc"));
+        $("body").scrollspy({
+            target: "#toc"
+        });
     });
 </script>
 </body>
 </html>
-"#;
+"##;
 
 fn favicon() -> String {
     use base64::prelude::*;
@@ -190,7 +198,7 @@ fn Index(props: &IndexProps) -> Html {
             <div class="row mt-2 mb-4"><ProgressBar points={props.points_scored()} total={props.total_points()}/></div>
             <div class="row">
                 <div class="col-sm-2 col-lg-1">
-                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                    <nav id="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10 col-lg-11">
                     {for props.olympiads.iter().map(|p| html! {
@@ -233,9 +241,21 @@ impl OlympiadProps {
 
 #[function_component]
 fn Olympiad(props: &OlympiadProps) -> Html {
+    let html_id = props
+        .name
+        .chars()
+        .map(|c| {
+            if c.is_ascii_whitespace() {
+                '-'
+            } else {
+                c.to_ascii_lowercase()
+            }
+        })
+        .collect::<String>();
+
     html! {
         <>
-            <h2 class="pb-2 mb-2">{&props.name}</h2>
+            <h2 class="pb-2 mb-2" id={html_id}>{&props.name}</h2>
             <div class="mt-2 mb-4">
                 <ProgressBar points={props.points_scored()} total={props.total_points()} />
             </div>
@@ -323,7 +343,7 @@ fn Problem(props: &ProblemProps) -> Html {
     let content = if content.is_empty() {
         "Nowhere to submit".to_string()
     } else {
-        content
+        format!("<ul class='ps-3 my-0'>{content}</ul>")
     };
 
     let suffix = match props.best_score() {
