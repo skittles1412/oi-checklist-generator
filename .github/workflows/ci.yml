@@ -17,6 +17,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
@@ -49,6 +50,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
@@ -110,6 +112,7 @@ jobs:
 
   fmt:
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@v4
 
