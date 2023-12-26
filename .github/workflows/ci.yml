@@ -90,6 +90,7 @@ jobs:
       - name: Build website
         if: github.event.action != 'closed'
         run: |
+          ls -R
           chmod +x oicg
 
           ./oicg -o examples/blank.html
