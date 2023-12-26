@@ -88,7 +88,6 @@ jobs:
           path: ~/.cache/oichecklistgenerator/
 
       - name: Build website
-        if: github.event.action != 'closed'
         run: |
           chmod +x oicg
 
@@ -111,6 +110,17 @@ jobs:
           folder: .
           force: false
           clean-exclude: pr-preview
+
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cleanup preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          action: remove
 
   fmt:
     runs-on: ubuntu-latest
