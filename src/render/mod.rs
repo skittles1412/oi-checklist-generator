@@ -323,7 +323,7 @@ fn Problem(props: &ProblemProps) -> Html {
     let content = if content.is_empty() {
         "Nowhere to submit".to_string()
     } else {
-        content
+        format!("<ul class='ps-3 my-0'>{content}</ul>")
     };
 
     let suffix = match props.best_score() {
