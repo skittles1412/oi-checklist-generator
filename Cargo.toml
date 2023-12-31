@@ -1,8 +1,20 @@
 [package]
 name = "oi_checklist_generator"
 version = "0.1.1"
+authors = ["skittles1412"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 edition = "2021"
 repository = "https://github.com/skittles1412/oi-checklist-generator"
+description = """
+A tool to automatically generate an OI checklist from the submission history of online judges.
+"""
+
+[package.metadata.wix]
+upgrade-guid = "1D3F9AA4-8AFE-47C0-BD80-CD2C5C99F301"
+path-guid = "EAD464C4-C632-4871-A95D-1944994A8DC5"
+license = false
+eula = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -38,8 +50,8 @@ cargo-dist-version = "0.6.2"
 # CI backends to support
 ci = ["github"]
 # The installers to generate for each app
-installers = ["shell", "powershell"]
+installers = ["shell", "powershell", "msi"]
 # Target platforms to build apps for (Rust target-triple syntax)
-targets = ["x86_64-unknown-linux-gnu", "aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"]
+targets = ["x86_64-unknown-linux-gnu", "aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-unknown-linux-musl", "x86_64-pc-windows-msvc"]
 # Publish jobs to run in CI
 pr-run-mode = "plan"
