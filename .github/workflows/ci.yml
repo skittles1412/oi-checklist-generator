@@ -99,15 +99,20 @@ jobs:
 
           sed -i -e 's/https:\/\/skittles1412.github.io\/oi-checklist-generator\///g' README.md # replace links to the github pages with relative links
 
+          mkdir public
+          cp -r examples README.md public
+
       - name: Deploy preview
         if: github.event_name == 'pull_request'
         uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: public
 
       - name: Deploy website
         uses: JamesIves/github-pages-deploy-action@v4
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
-          folder: .
+          folder: public
           force: false
           clean-exclude: pr-preview
 
