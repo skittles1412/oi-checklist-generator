@@ -42,6 +42,7 @@ fn save_cache_to_file(t: &Cache, file: impl AsRef<Path>) -> anyhow::Result<()> {
 
 // TODO: codeforces support
 #[derive(Parser)]
+#[command(author, version, about, long_about = None)]
 struct Cli {
     /// DMOJ username
     #[arg(long("dmoj"), alias("dmoj-username"))]
