@@ -21,6 +21,7 @@ const DATA: &[Year] = olympiad!(
     2021 => {"Hexagonal Territory", APIO21_hexagon, no_dmoj}, {"Rainforest Jumps", APIO21_jumps, no_dmoj}, {"Road Closures", APIO21_roads, no_dmoj};
     2022 => {"Mars", APIO22_mars, no_dmoj}, {"Game", APIO22_game, apio22p2}, {"Permutation", APIO22_perm, apio22p3};
     2023 => {"Cyberland", APIO23_cyberland, apio23p1}, {"Sequence", APIO23_sequence, apio23p2}, {"Alice, Bob, and Circuit", APIO23_abc, apio23p3};
+    2024 => {"September", APIO24_september, no_dmoj}, {"Train", APIO24_train, no_dmoj}, {"Magic Show", APIO24_show, no_dmoj};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {

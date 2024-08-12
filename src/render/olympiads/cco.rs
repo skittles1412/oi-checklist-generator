@@ -32,6 +32,7 @@ const DATA: &[Year] = olympiad!(
     2021 => {"Swap Swap Sort", cco21p1, CCO21_day1problem1}, {"Weird Numeral System", cco21p2, CCO21_day1problem2}, {"Through Another Maze Darkly", cco21p3, CCO21_day1problem3}, {"Travelling Merchant", cco21p4, CCO21_day2problem1}, {"Bread First Search", cco21p5, CCO21_day2problem2}, {"Loop Town", cco21p6, CCO21_day2problem3};
     2022 => {"Alternating Heights", cco22p1, CCO22_day1problem1}, {"Rainy Markets", cco22p2, CCO22_day1problem2}, {"Double Attendance", cco22p3, CCO22_day1problem3}, {"Bi-ing Lottery Treekets", cco22p4, CCO22_day2problem1}, {"Phone Plans", cco22p5, CCO22_day2problem2}, {"Good Game", cco22p6, CCO22_day2problem3};
     2023 => {"Binaria", cco23p1, CCO23_day1problem1}, {"Real Mountains", cco23p2, CCO23_day1problem2}, {"Line Town", cco23p3, CCO23_day1problem3}, {"Flip it and Stick it", cco23p4, CCO23_day2problem1}, {"Travelling Trader", cco23p5, CCO23_day2problem2}, {"Triangle Collection", cco23p6, CCO23_day2problem3};
+    2024 => {"Treasure Hunt", cco24p1, CCO24_day1problem1}, {"Pizza Party", cco24p2, CCO24_day1problem2}, {"Summer Driving", cco24p3, CCO24_day1problem3}, {"Infiltration", cco24p4, CCO24_day2problem1}, {"Heavy Light Decomposition", cco24p5, CCO24_day2problem2}, {"Telephone Plans", cco24p6, CCO24_day2problem3};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {

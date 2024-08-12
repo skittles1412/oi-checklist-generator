@@ -20,6 +20,8 @@ const DATA: &[Year] = olympiad!(
     2020 => {"Fancy Fence", CEOI20_fancyfence, no_dmoj}, {"Roads", CEOI20_roads, no_dmoj}, {"Star Trek", CEOI20_startrek, no_dmoj}, {"The Potion of Great Power", CEOI20_potion, no_dmoj}, {"Spring cleaning", CEOI20_cleaning, no_dmoj}, {"Chess Rush", CEOI20_chessrush, no_dmoj};
     2021 => {"Diversity", CEOI21_diversity, no_dmoj}, {"L-triominoes", CEOI21_ltriominoes, no_dmoj}, {"Newspapers", CEOI21_newspapers, no_dmoj}, {"Stones", CEOI21_stones, no_dmoj}, {"Tortoise", CEOI21_tortoise, no_dmoj}, {"Wells", CEOI21_wells, no_dmoj};
     2022 => {"Abracadabra", CEOI22_abracadabra, ceoi22p1}, {"Homework", CEOI22_homework, ceoi22p2}, {"Prize", CEOI22_prize, ceoi22p3}, {"Drawing", CEOI22_drawing, ceoi22p4}, {"Measures", CEOI22_measures, ceoi22p5}, {"Parking", CEOI22_parking, ceoi22p6};
+    2023 => {"A Light Inconvenience", CEOI23_light, no_dmoj}, {"Bring Down the Grading Server", CEOI23_gradingserver, no_dmoj}, {"Brought Down the Grading Server?", CEOI23_balance, no_dmoj}, {"Tricks of the Trade", CEOI23_trade, no_dmoj}, {"The Ties That Guide Us", CEOI23_incursion, no_dmoj}, {"How to Avoid Disqualification in 75 Easy Steps", CEOI23_avoid, no_dmoj};
+    2024 => {"Naval battle", CEOI24_battle, no_dmoj}, {"COVID tests", CEOI24_covid, no_dmoj}, {"Text editor", CEOI24_editor, no_dmoj}, {"Toy", CEOI24_toy, no_dmoj}, {"Petrol stations", CEOI24_stations, no_dmoj}, {"Sprinklers", CEOI24_sprinklers, no_dmoj};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {

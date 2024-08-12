@@ -57,6 +57,7 @@ const DATA: &[Year] = olympiad!(
     2020 => {"Colors", BOI20_colors, no_dmoj}, {"Mixture", BOI20_mixture, no_dmoj}, {"Joker", BOI20_joker, btoi20p3}, {"Graph", BOI20_graph, no_dmoj}, {"Village", BOI20_village, no_dmoj}, {"Viruses", BOI20_viruses, no_dmoj};
     2021 => {"A Difficult(y) Choice", BOI21_books, no_dmoj}, {"Inside information", BOI21_servers, no_dmoj}, {"From Hacks to Snitches", BOI21_watchmen, no_dmoj}, {"The short shank; Redemption", BOI21_prison, no_dmoj}, {"The Collection Game", BOI21_swaps, no_dmoj}, {"The Xana coup", BOI21_xanadu, no_dmoj};
     2022 => {"Art Collections", BOI22_art, no_dmoj}, {"Event Hopping", BOI22_events, no_dmoj}, {"Uplifting Excursion", BOI22_vault, no_dmoj}, {"Flight to the Ford", BOI22_communication, no_dmoj}, {"Stranded Far From Home", BOI22_island, no_dmoj}, {"Boarding Passes", BOI22_passes, no_dmoj};
+    2024 => {"Jobs", BOI24_jobs, no_dmoj}, {"Portal", BOI24_portal, no_dmoj}, {"Trains", BOI24_trains, no_dmoj}, {"Fire", BOI24_fire, no_dmoj}, {"Tiles", BOI24_tiles, no_dmoj}, {"Flooding Wall", BOI24_wall, no_dmoj};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {

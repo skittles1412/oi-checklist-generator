@@ -32,6 +32,7 @@ const DATA: &[Year] = olympiad!(
     2021 => {"Crazy Fencing", ccc21s1}, {"Modern Art", ccc21s2}, {"Lunch Concert", ccc21s3}, {"Daily Commute", ccc21s4}, {"Math Homework", ccc21s5};
     2022 => {"Good Fours and Good Fives", ccc22s1}, {"Good Groups", ccc22s2}, {"Good Samples", ccc22s3}, {"Good Triplets", ccc22s4}, {"Good Influencers", ccc22s5};
     2023 => {"Trianglane", ccc23s1}, {"Symmetric Mountains", ccc23s2}, {"Palindromic Poster", ccc23s3}, {"Minimum Cost Roads", ccc23s4}, {"The Filter", ccc23s5};
+    2024 => {"Hat Circle", ccc24s1}, {"Heavy-Light Composition", ccc24s2}, {"Swipe", ccc24s3}, {"Painting Roads", ccc24s4}, {"Chocolate Bar Partition", ccc24s5};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {
