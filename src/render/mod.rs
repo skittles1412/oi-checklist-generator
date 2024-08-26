@@ -373,14 +373,15 @@ pub async fn render_checklist(
         ojuz_username,
         olympiads: vec![
             olympiads::ioi::to_olympiad(&ojs),
-            olympiads::joisc::to_olympiad(&ojs),
-            olympiads::joi_open::to_olympiad(&ojs),
             olympiads::apio::to_olympiad(&ojs),
             olympiads::ceoi::to_olympiad(&ojs),
+            olympiads::boi::to_olympiad(&ojs),
+            olympiads::joisc::to_olympiad(&ojs),
+            olympiads::joi_open::to_olympiad(&ojs),
+            olympiads::joi_final::to_olympiad(&ojs),
             olympiads::cnoi::to_olympiad(&ojs),
             olympiads::cco::to_olympiad(&ojs),
             olympiads::ccc::to_olympiad(&ojs),
-            olympiads::boi::to_olympiad(&ojs),
         ],
     })
     .render()
