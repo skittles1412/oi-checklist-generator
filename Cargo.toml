@@ -23,19 +23,19 @@ name = "oicg"
 path = "src/main.rs"
 
 [dependencies]
-anyhow = "1.0.78"
-async-trait = "0.1.76"
-base64 = "0.21.5"
-clap = { version = "4.4.12", features = ["derive"] }
-console = "0.15.7"
+anyhow = "1.0.86"
+async-trait = "0.1.81"
+base64 = "0.22.1"
+clap = { version = "4.5.16", features = ["derive"] }
+console = "0.15.8"
 directories = "5.0.1"
-indicatif = "0.17.7"
+indicatif = "0.17.8"
 nipper = "0.1.9"
-open = "5.0.1"
-reqwest = { version = "0.11.23", features = ["rustls-tls", "json", "multipart", "gzip", "cookies"], default-features = false }
-serde = "1.0.193"
-serde_json = "1.0.108"
-tokio = { version = "1.35.1", features = ["macros", "rt", "rt-multi-thread", "sync"] }
+open = "5.3.0"
+reqwest = { version = "0.12.7", features = ["rustls-tls", "json", "multipart", "gzip", "cookies"], default-features = false }
+serde = "1.0.209"
+serde_json = "1.0.127"
+tokio = { version = "1.39.3", features = ["macros", "rt", "rt-multi-thread", "sync"] }
 yew = { version = "0.21.0", features = ["ssr"] }
 
 # The profile that 'cargo dist' will build with
