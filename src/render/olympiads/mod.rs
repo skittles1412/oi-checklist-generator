@@ -9,6 +9,7 @@ pub mod cco;
 pub mod ceoi;
 pub mod cnoi;
 pub mod ioi;
+pub mod joi_final;
 pub mod joi_open;
 pub mod joisc;
 
