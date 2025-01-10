@@ -28,6 +28,8 @@ impl Parser {
         let mut new_submissions = vec![];
 
         let mut page = 1;
+        let mut last_id = None;
+
         'label: loop {
             channel
                 .send(ParserEvent::Parsing {
@@ -36,7 +38,12 @@ impl Parser {
                 })
                 .ok();
 
-            let url = format!("https://oj.uz/submissions?handle={username}&page={page}");
+            let url = match last_id {
+                Some(id) => {
+                    format!("https://oj.uz/submissions?handle={username}&direction=down&id={id}")
+                }
+                None => format!("https://oj.uz/submissions?handle={username}"),
+            };
 
             let html = client
                 .get(&url)
@@ -100,6 +107,7 @@ impl Parser {
                         score,
                     },
                 ));
+                last_id = Some(id);
                 found_new_submission = true;
             }
 
