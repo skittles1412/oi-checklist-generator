@@ -20,7 +20,6 @@ impl Cache {
         cookie_store: impl CookieStore + 'static,
     ) -> anyhow::Result<OnlineJudges> {
         let client = Client::builder()
-            .gzip(true)
             .cookie_provider(Arc::new(cookie_store))
             .build()
             .context("failed to build HTTP client")?;
