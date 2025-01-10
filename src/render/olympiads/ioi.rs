@@ -75,6 +75,7 @@ const DATA: &[Year] = olympiad!(
     2021 => {"Distributing Candies", IOI21_candies, ioi21p1, 103782/A}, {"Keys", IOI21_keys, ioi21p2, 103782/B}, {"Fountain Parks", IOI21_parks, ioi21p3, 103782/C}, {"Mutating DNA", IOI21_dna, ioi21p4, 103784/D}, {"Dungeons Game", IOI21_dungeons, ioi21p5, 103784/E}, {"Bit Shift Registers", IOI21_registers, ioi21p6, 103784/F};
     2022 => {"Catfish Farm", IOI22_fish, ioi22p1, 103877/A}, {"Prisoner Challenge", IOI22_prison, ioi22p2, 103877/B}, {"Radio Towers", IOI22_towers, ioi22p3, 103877/C}, {"Digital Circuit", IOI22_circuit, ioi22p4, 103880/D}, {"Rarest Insects", IOI22_insects, ioi22p5, 103880/E}, {"Thousands Islands", IOI22_islands, ioi22p6, 103880/F};
     2023 => {"Closing Time", IOI23_closing, ioi23p1, 104548/A}, {"Longest Trip", IOI23_longesttrip, ioi23p2, 104548/B}, {"Soccer Stadium", IOI23_soccer, ioi23p3, 104548/C}, {"Beech Tree", IOI23_beechtree, ioi23p4, 104552/D}, {"Overtaking", IOI23_overtaking, ioi23p5, 104552/E}, {"Robot Contest", IOI23_robot, ioi23p6, 104552/F};
+    2024 => {"Nile", IOI24_nile, ioi24p1, 105328/A}, {"Message", IOI24_message, ioi24p2, 105328/B}, {"Tree", IOI24_tree, ioi24p3, 105328/C}, {"Hieroglyphs", IOI24_hieroglyphs, ioi24p4, 105330/D}, {"Mosaic", IOI24_mosaic, ioi24p5, 105330/E}, {"Sphinx's Riddle", IOI24_sphinx, ioi24p6, 105330/F};
 );
 
 pub(in super::super) fn to_olympiad(ojs: &OnlineJudges) -> OlympiadProps {
